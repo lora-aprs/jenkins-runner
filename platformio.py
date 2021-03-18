@@ -2,7 +2,7 @@
 
 import subprocess
 
-pio_package_path = "/home/pi/.platformio/packages"
+pio_package_path = "$HOME/.platformio/packages"
 
 def clear_flash(port):
 	subprocess.run(f"/usr/bin/python3 {pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {port} erase_flash", shell=True)
