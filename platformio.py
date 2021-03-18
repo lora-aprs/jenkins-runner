@@ -16,8 +16,6 @@ def compile_filesystem(fs_path, fs_bin):
 def upload_filesystem(port, fs_bin):
 	subprocess.run(f"/usr/bin/python3 {pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {port} --baud 460800 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_size detect 2686976 {fs_bin}", shell=True)
 
-	pass
-
 
 
 import sys, os
@@ -41,14 +39,14 @@ upload_firmware(port, bin_dir)
 import time, serial
 import datetime
 
-delta = datetime.timedelta(hours=10)
+delta = datetime.timedelta(hours=1)
 stop_time = datetime.datetime.now() + delta
 print(stop_time)
-ser = serial.Serial(port, 115200, timeout=0)
+ser = serial.Serial(port, 115200, timeout=1)
 while datetime.datetime.now() < stop_time:
-    s = ser.read(100)
-    if s:
-        print(s.decode())
+    line = ser.readline()
+    if line:
+        print(line.decode(), end='')
 print(datetime.datetime.now())
 
 ser.close()
