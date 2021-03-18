@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/python3 -u
 
 import subprocess
 
@@ -25,10 +25,13 @@ import sys, os
 pathname = os.path.dirname(sys.argv[0])
 full_path = os.path.abspath(pathname)
 
+print(f"full path: {full_path}")
 port = "/dev/ttyUSB1"
 bin_dir = f"{full_path}/binaries"
 fs_path = f"{full_path}/fs"
 fs_bin = f"{full_path}/spiffs.bin"
+
+print(f"port: {port}")
 
 clear_flash(port)
 compile_filesystem(fs_path, fs_bin)
@@ -45,7 +48,7 @@ ser = serial.Serial(port, 115200, timeout=0)
 while datetime.datetime.now() < stop_time:
     s = ser.read(100)
     if s:
-        print(s.decode(), end='')
+        print(s.decode())
 print(datetime.datetime.now())
 
 ser.close()
