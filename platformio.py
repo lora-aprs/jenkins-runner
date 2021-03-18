@@ -38,7 +38,7 @@ upload_firmware(port, bin_dir)
 import time, serial
 import datetime
 
-delta = datetime.timedelta(minutes=1)
+delta = datetime.timedelta(hours=10)
 stop_time = datetime.datetime.now() + delta
 print(stop_time)
 ser = serial.Serial(port, 115200, timeout=0)
