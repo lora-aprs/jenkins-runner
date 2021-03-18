@@ -26,7 +26,7 @@ pathname = os.path.dirname(sys.argv[0])
 full_path = os.path.abspath(pathname)
 
 port = "/dev/ttyUSB1"
-bin_dir = f"{full_path}/.pio/build/lora_board"
+bin_dir = f"{full_path}/binaries"
 fs_path = f"{full_path}/fs"
 fs_bin = f"{full_path}/spiffs.bin"
 
