@@ -1,56 +1,43 @@
 #!/bin/python3 -u
 
 import subprocess
-
-pio_package_path = "$HOME/.platformio/packages"
-
-def clear_flash(port):
-	subprocess.run(f"/usr/bin/python3 {pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {port} erase_flash", shell=True)
-
-def upload_firmware(port, bin_dir):
-	subprocess.run(f"/usr/bin/python3 {pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {port} --baud 460800 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 {bin_dir}/bootloader_dio_40m.bin 0x8000 {bin_dir}/partitions.bin 0xe000 {bin_dir}/boot_app0.bin 0x10000 {bin_dir}/firmware.bin", shell=True)
-
-def compile_filesystem(fs_path, fs_bin):
-	subprocess.run(f"{pio_package_path}/tool-mkspiffs/mkspiffs_espressif32_arduino -c {fs_path} -p 256 -b 4096 -s 1507328 {fs_bin}", shell=True)
-
-def upload_filesystem(port, fs_bin):
-	subprocess.run(f"/usr/bin/python3 {pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {port} --baud 460800 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_size detect 2686976 {fs_bin}", shell=True)
-
-
-
-import sys, os
-
-pathname = os.path.dirname(sys.argv[0])
-full_path = os.path.abspath(pathname)
-
-print(f"full path: {full_path}")
-port = "/dev/ttyUSB1"
-bin_dir = f"{full_path}/binaries"
-fs_path = f"{full_path}/fs"
-fs_bin = f"{full_path}/spiffs.bin"
-
-print(f"port: {port}")
-
-clear_flash(port)
-compile_filesystem(fs_path, fs_bin)
-upload_filesystem(port, fs_bin)
-upload_firmware(port, bin_dir)
-
-import time, serial
+import time
+import serial
 import datetime
 
-delta = datetime.timedelta(hours=1)
-stop_time = datetime.datetime.now() + delta
-print(stop_time)
-ser = serial.Serial(port, 115200, timeout=1)
-while datetime.datetime.now() < stop_time:
-    line = ser.readline()
-    if line:
-        print(line.decode(), end='')
-print(datetime.datetime.now())
+class dut:
+	def __init__(self, port):
+		self.pio_package_path = "$HOME/.platformio/packages"
+		self.port = port
 
-ser.close()
-time.sleep(1)
+	def mkspiffs(self, fs_path, fs_bin):
+		print("---------------------------------------------------------------------------------")
+		print(f" make spiffs with files from {fs_path}")
+		print("---------------------------------------------------------------------------------")
+		subprocess.run(f"{self.pio_package_path}/tool-mkspiffs/mkspiffs_espressif32_arduino -c {fs_path} -p 256 -b 4096 -s 1507328 {fs_bin}", shell=True)
 
-clear_flash(port)
+	def erase_flash(self):
+		print("---------------------------------------------------------------------------------")
+		print(f" erase flash")
+		print("---------------------------------------------------------------------------------")
+		subprocess.run(f"/usr/bin/python3 {self.pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {self.port} erase_flash", shell=True)
 
+	def write_flash(self, addr, bin_file):
+		print("---------------------------------------------------------------------------------")
+		print(f" write flash with file {bin_file}")
+		print("---------------------------------------------------------------------------------")
+		subprocess.run(f"/usr/bin/python3 {self.pio_package_path}/tool-esptoolpy/esptool.py --chip esp32 --port {self.port} --baud 460800 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_size detect {addr} {bin_file}", shell=True)
+
+	def monitor(self, timeout_min):
+		delta = datetime.timedelta(minutes=timeout_min)
+		stop_time = datetime.datetime.now() + delta
+		print("---------------------------------------------------------------------------------")
+		print(f" will stop monitoring at {stop_time}")
+		print("---------------------------------------------------------------------------------")
+		ser = serial.Serial(self.port, 115200, timeout=1)
+		while datetime.datetime.now() < stop_time:
+			line = ser.readline()
+			if line:
+				print(line.decode(), end='')
+		ser.close()
+		time.sleep(1)
