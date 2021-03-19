@@ -18,7 +18,7 @@
 	},
 	"aprs_is": {
 		"passcode": "22948",
-		"server": "euro.aprs2.net",
+		"server": "jenkins.lora-aprs.info",
 		"port": 14580
 	},
 	"lora": {
