@@ -1,15 +1,11 @@
 {
-	"callsign": "OE5BPA-10",
+	"callsign": "OE5BPA-20",
 	"wifi": {
 		"AP": [
-			{
-				"SSID": "OE5BPA_Guest",
-				"password": "Guest_OE5BPA"
-			}
 		]
 	},
 	"beacon": {
-		"message": "LoRa iGATE & Digi, Info: github.com/lora-aprs/LoRa_APRS_iGate",
+		"message": "LoRa iGATE, Info: github.com/lora-aprs/LoRa_APRS_iGate",
 		"position": {
 			"latitude": 48.33039690607431,
 			"longitude": 14.311417512073954
@@ -18,7 +14,7 @@
 	},
 	"aprs_is": {
 		"passcode": "22948",
-		"server": "jenkins.lora-aprs.info",
+		"server": "aprs.lora-aprs.info",
 		"port": 14580
 	},
 	"lora": {

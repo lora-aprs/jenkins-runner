@@ -1,0 +1,48 @@
+{
+	"callsign": "OE5BPA-10",
+	"wifi": {
+		"AP": [
+			{
+				"SSID": "OE5BPA_Guest",
+				"password": "Guest_OE5BPA"
+			}
+		]
+	},
+	"beacon": {
+		"message": "LoRa iGATE, Info: github.com/lora-aprs/LoRa_APRS_iGate",
+		"position": {
+			"latitude": 48.33039690607431,
+			"longitude": 14.311417512073954
+		},
+		"timeout": 15
+	},
+	"aprs_is": {
+		"passcode": "22948",
+		"server": "aprs.lora-aprs.info",
+		"port": 14580
+	},
+	"lora": {
+		"frequency_rx": 433775000,
+		"frequency_tx": 433775000,
+		"power": 20,
+		"spreading_factor": 12,
+		"signal_bandwidth": 125000,
+		"coding_rate4": 5
+	},
+	"display": {
+		"always_on": true,
+		"timeout": 10,
+		"overwrite_pin": 0,
+		"turn180": true
+	},
+	"ftp": {
+		"active": false,
+		"user": [
+			{
+				"name": "ftp",
+				"password": "ftp"
+			}
+		]
+	},
+	"ntp_server": "pool.ntp.org"
+}
