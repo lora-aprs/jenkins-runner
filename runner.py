@@ -33,4 +33,6 @@ dut.write_flash("0x10000", f"{bin_dir}/firmware.bin")
 
 dut.monitor(timeout_min)
 
+dut.write_flash("0x10000", f"{full_path}/DisplayCleaner.bin")
+time.sleep(1)
 dut.erase_flash()
