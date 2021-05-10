@@ -41,3 +41,21 @@ class dut:
 				print(line.decode(), end='')
 		ser.close()
 		time.sleep(1)
+
+	def send_nmea(self, nmea_file):
+		f = open(nmea_file, "r")
+		ser = serial.Serial(self.port, 115200, timeout=1)
+
+		sleep_count = 0
+		for x in f:
+			s = ser.read(500)
+			if s:
+				print(s.decode(), end='')
+			sleep_count = sleep_count + 1
+			ser.write(x.encode())
+			if sleep_count > 2:
+				time.sleep(1)
+				sleep_count = 0
+		ser.close()
+		f.close()
+		time.sleep(1)
