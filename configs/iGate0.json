@@ -24,7 +24,7 @@
 	"lora": {
 		"frequency_rx": 433500000,
 		"frequency_tx": 433500000,
-		"power": 20,
+		"power": 0,
 		"spreading_factor": 12,
 		"signal_bandwidth": 125000,
 		"coding_rate4": 5
