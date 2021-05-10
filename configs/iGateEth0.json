@@ -18,8 +18,8 @@
 		"port": 14580
 	},
 	"lora": {
-		"frequency_rx": 433775000,
-		"frequency_tx": 433775000,
+		"frequency_rx": 433500000,
+		"frequency_tx": 433500000,
 		"power": 20,
 		"spreading_factor": 12,
 		"signal_bandwidth": 125000,
