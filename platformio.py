@@ -34,7 +34,7 @@ class dut:
 		print("---------------------------------------------------------------------------------")
 		print(f" will stop monitoring at {stop_time}")
 		print("---------------------------------------------------------------------------------")
-		ser = serial.Serial(self.port, 115200, timeout=1)
+		ser = serial.Serial(self.port, 115200, timeout=0)
 		while datetime.datetime.now() < stop_time:
 			line = ser.readline()
 			if line:
@@ -43,9 +43,11 @@ class dut:
 		time.sleep(1)
 
 	def send_nmea(self, nmea_file):
+		print("---------------------------------------------------------------------------------")
+		print(f" start sending nmea data to {self.port}")
+		print("---------------------------------------------------------------------------------")
 		f = open(nmea_file, "r")
-		ser = serial.Serial(self.port, 115200, timeout=1)
-
+		ser = serial.Serial(self.port, 115200, timeout=0)
 		sleep_count = 0
 		for x in f:
 			s = ser.read(500)
