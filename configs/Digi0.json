@@ -1,5 +1,28 @@
 {
 	"callsign": "OE5BPA-12",
+	"network": {
+		"DHCP": true,
+		"static": {
+			"ip": "192.168.0.100",
+			"subnet": "255.255.255.0",
+			"gateway": "192.168.0.1",
+			"dns1": "192.168.0.1",
+			"dns2": "192.168.0.2"
+		},
+		"hostname": {
+			"overwrite": false,
+			"name": "NOCALL-10"
+		}
+	},
+	"wifi": {
+		"active": true,
+		"AP": [
+			{
+				"SSID": "YOURSSID",
+				"password": "YOURPASSWORD"
+			}
+		]
+	},
 	"beacon": {
 		"message": "LoRa Digi, Info: github.com/lora-aprs/LoRa_APRS_iGate",
 		"position": {
@@ -9,7 +32,10 @@
 		"timeout": 15
 	},
 	"aprs_is": {
-		"active": false
+		"active": false,
+		"passcode": "",
+		"server": "euro.aprs2.net",
+		"port": 14580
 	},
 	"digi": {
 		"active": true,
@@ -17,6 +43,7 @@
 	},
 	"lora": {
 		"frequency_rx": 433500000,
+		"gain_rx": 0,
 		"frequency_tx": 433500000,
 		"power": 0,
 		"spreading_factor": 12,
@@ -28,5 +55,23 @@
 		"timeout": 10,
 		"overwrite_pin": 0,
 		"turn180": true
-	}
+	},
+	"ftp": {
+		"active": false,
+		"user": [
+			{
+				"name": "ftp",
+				"password": "ftp"
+			}
+		]
+	},
+	"mqtt": {
+		"active": false,
+		"server": "",
+		"port": 1883,
+		"name": "",
+		"password": "",
+		"topic": "LoraAPRS/Data"
+	},
+	"ntp_server": "pool.ntp.org"
 }

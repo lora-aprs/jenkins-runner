@@ -1,6 +1,21 @@
 {
 	"callsign": "OE5BPA-10",
+	"network": {
+		"DHCP": true,
+		"static": {
+			"ip": "192.168.0.100",
+			"subnet": "255.255.255.0",
+			"gateway": "192.168.0.1",
+			"dns1": "192.168.0.1",
+			"dns2": "192.168.0.2"
+		},
+		"hostname": {
+			"overwrite": false,
+			"name": "NOCALL-10"
+		}
+	},
 	"wifi": {
+		"active": true,
 		"AP": [
 			{
 				"SSID": "OE5BPA_Guest",
@@ -17,12 +32,18 @@
 		"timeout": 15
 	},
 	"aprs_is": {
+		"active": true,
 		"passcode": "22948",
 		"server": "aprs.lora-aprs.info",
 		"port": 14580
 	},
+	"digi": {
+		"active": false,
+		"beacon": false
+	},
 	"lora": {
 		"frequency_rx": 433500000,
+		"gain_rx": 0,
 		"frequency_tx": 433500000,
 		"power": 0,
 		"spreading_factor": 12,
@@ -43,6 +64,14 @@
 				"password": "ftp"
 			}
 		]
+	},
+	"mqtt": {
+		"active": false,
+		"server": "",
+		"port": 1883,
+		"name": "",
+		"password": "",
+		"topic": "LoraAPRS/Data"
 	},
 	"ntp_server": "pool.ntp.org"
 }
