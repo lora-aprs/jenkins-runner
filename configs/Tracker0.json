@@ -9,7 +9,7 @@
 			"symbol": "[",
 			"overlay": "/",
 			"smart_beacon": {
-				"active": true,
+				"active": false,
 				"turn_min": 25,
 				"slow_rate": 300,
 				"slow_speed": 10,
